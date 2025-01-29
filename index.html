@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontale Tijdlijn</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Faustina:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Header Section -->
+<header class="header-text">
+    <h1>Tijdlijn 25 jaar Hogeschool Utrecht</h1>
+    <p>De hoogte en diepte punten op de Hogeschool Utrecht</p>
+</header>
+<!-- Vergrote afbeelding modal -->
+<div id="image-modal" class="image-modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modal-image">
+</div>
+<!-- Statische cirkel op de achtergrond -->
+<div class="background-circle"></div>
+
+<!-- Timeline Section -->
+<div class="timeline-container">
+    <button class="timeline-arrow left-arrow">&lt;</button>
+    <div class="timeline-scroll">
+        <div class="timeline-content">
+            <div class="timeline-line"></div>
+            <div class="timeline-dots"></div>
+            <!-- Dynamische inhoud wordt door script.js toegevoegd -->
+        </div>
+    </div>
+    <button class="timeline-arrow right-arrow">&gt;</button>
+</div>
+<div id="container">
+    <button id="previous" style="display: none;">Vorige</button>
+    <button id="next">Volgende</button>
+</div>
+
+<!-- Popup Section (Statisch in beeld) -->
+<div class="popup-static">
+    <div class="popup-content">
+        <!-- Afbeelding en Bron -->
+        <div class="popup-image-container">
+            <img id="popup-image" src="images/image2000_1.jpg" alt="HBO-fraudeaffaire">
+            <p class="source-text"><strong>Bron:</strong> Trajectum Magazine, editie 2000</p>
+        </div>
+
+        <!-- Tekst -->
+        <div id="popup-text" class="popup-text">
+            <div id="popup-controls" class="popup-controls"></div>
+
+            <h3>HBO-fraudeaffaire</h3>
+            <p>In 2001 bleek dat enkele hogescholen, waaronder de HU, er dubieuze praktijken op na hielden bij de inschrijving van studenten.</p>
+        </div>
+
+
+
+        <!-- Datum en Info -->
+        <div id="popup-date" class="popup-date">
+            <span class="popup-date-text">15 februari 2000</span>
+            <span class="info-icon" onclick="showExtraInfo()">i</span>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<!-- Intro Overlay -->
+<div id="intro-overlay" class="overlay">
+    <div class="overlay-content">
+        <h1>Hogeschool Utrecht door de tijd: de hoogtepunten</h1>
+        <p>
+            In deze tijdlijn word je meegenomen in een interessante reis door 25 jaar geschiedenis van de Hogeschool Utrecht. Van het vieren van het 50-jarige jubileum in 2000 tot de recente DDoS-aanval in 2025. Verschillende hoogtepunten zoals de introductie van innovatieve studentenhuisvesting, de start van de Tour de France en de opening van het regenboogfietspad. Deze hoogtepunten illustreren de groei van de Hogeschool. Tegelijkertijd worden er ook uitdagingen zoals de HBO-fraudeaffaire en het invoeren van het bindend studieadvies (BSA) in beeld gebracht die een impact hebben op studenten van de Hogeschool.
+        </p>
+        <button id="start-button" class="start-button">Beginnen &nbsp; <span>&#x27A4;</span></button>
+    </div>
+</div>
+
+<!-- Lijn van popup naar tijdlijn -->
+<div class="popup-line"></div>
+
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

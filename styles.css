@@ -1,0 +1,510 @@
+/* Algemene stijl */
+body {
+    font-family: 'DM Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: #4d1c3a;
+    color: #fbd000;
+}
+.popup-date {
+    display: flex; /* Gebruik flexbox om items uit te lijnen */
+    align-items: center; /* Verticaal centreren */
+    justify-content: space-between; /* Ruimte tussen datum en info-icoon */
+    padding: 0.5vh 1vw; /* Dynamische padding */
+    background-color: #fbd000; /* Gele achtergrond */
+    color: #4d1c3a; /* Donkerpaarse tekstkleur */
+    border-radius: 1vh;
+    font-size: 1.5vh; /* Dynamische tekstgrootte */
+    font-weight: bold;
+    box-shadow: 0.2vw 0.5vh rgba(0, 0, 0, 0.2); /* Schaduw voor visueel effect */
+    z-index: 10; /* Zorgt dat het boven andere elementen staat */
+    gap: 1vw; /* Ruimte tussen de datum en het icoon */
+}
+
+.info-icon {
+    display: inline-block; /* Inline-block voor flexpositie */
+    width: 2.4vh; /* Grootte van het icoon */
+    height: 2.4vh;
+    line-height: 2.4vh; /* Tekst verticaal gecentreerd */
+    text-align: center;
+    font-size: 1.6vh; /* Dynamische tekstgrootte */
+    font-weight: bold;
+    color: white; /* Witte tekst */
+    background-color: #4d1c3a; /* Donkerpaarse achtergrond */
+    border-radius: 50%; /* Maak het icoon cirkelvormig */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    margin-left: auto; /* Zorg dat het icoon rechts staat */
+}
+
+.info-icon:hover {
+    background-color: #6a2b55; /* Donkerdere kleur bij hover */
+}
+
+/* Header Section */
+.header-text {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2vh 2vw;
+    background-color: #4d1c3a;
+    font-family: 'faustina', serif;
+    z-index: 100;
+    text-align: left;
+}
+.circle.active {
+    background-color: #fbd000; /* Geel voor actieve marker */
+}
+
+.header-text h1 {
+    font-size: 3.5vw; /* Dynamisch voor verschillende schermgroottes */
+    font-weight: 700;
+    font-family: 'faustina', serif;
+    margin: 0;
+}
+
+.header-text p {
+    font-size: 2vw;
+    font-weight: 400;
+    font-family: 'faustina', serif;
+    margin: 0.5vh 0 0 0;
+}
+
+/* Tijdlijn Container */
+.timeline-container {
+    position: fixed;
+    bottom: 0;
+    height: 20%;
+    width: 100%;
+    background-color: #4d1c3a;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.timeline-scroll {
+    height: 100%;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    position: relative;
+    white-space: nowrap;
+}
+
+.timeline-content {
+    display: inline-flex;
+    position: relative;
+    height: 100%;
+    align-items: center;
+    min-width: calc((2025 - 1999) * 20vw); /* Dynamische breedte berekend op basis van jaren */
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 0.4vh;
+    width: 327%;
+    background-color: #fbd000;
+    z-index: 0;
+}
+
+/* Dotted line between years */
+.timeline-dots {
+    position: absolute;
+    top: calc(50% + 2vh);
+    left: 0;
+    width: 327%;
+    height: 0.5vh;
+    z-index: 0;
+    background-image: repeating-linear-gradient(
+            to right,
+            #fbd000 0,
+            #fbd000 0.5vh,
+            transparent 0.5vh,
+            transparent 1vh
+    );
+}
+
+/* Marker for each year */
+.marker {
+    position: relative;
+    width: 20vw;
+    text-align: center;
+}
+
+.marker .circle {
+    width: 2vh;
+    height: 2vh;
+    border-radius: 50%;
+    background-color: #4d1c3a;
+    border: 0.2vh solid #fbd000;
+    margin: 0 auto;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: absolute;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    transform-origin: center; /* Zorg dat de schaalvergroting gecentreerd blijft */
+}
+
+.marker .circle.active {
+    background-color: #fbd000;
+    transform: translate(-50%, -50%) scale(1.3); /* Combineer schaal en positionering */
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+
+/* Modal achtergrond */
+.image-modal {
+    display: none; /* Verberg standaard */
+    position: fixed;
+    z-index: 1000; /* Zorgt dat het boven andere elementen staat */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Schuifbalk als de inhoud groter is dan het scherm */
+    background-color: rgba(0, 0, 0, 0.9); /* Donkere achtergrond */
+}
+
+/* Afbeelding in de modal */
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%; /* Max breedte van de afbeelding */
+    max-height: 80%; /* Max hoogte van de afbeelding */
+    border: 5px solid #fbd000;
+    border-radius: 10px;
+}
+
+/* Sluiten knop */
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fbd000;
+    font-size: 40px;
+    font-weight: bold;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: white;
+}
+
+.year-label {
+    font-size: 1.5vh;
+    font-weight: bold;
+    color: #fbd000;
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    writing-mode: vertical-rl;
+    z-index: 2;
+    background-color: #4d1c3a;
+    border-radius: 0.8vh;
+    padding: 0.5vh 1vw;
+    border: 0.2vh solid #4d1c3a;
+    text-align: center;
+}
+/* Statische cirkel op de achtergrond */
+.background-circle {
+    position: absolute;
+    top: 50%; /* Plaats de cirkel verticaal gecentreerd */
+    right: -50%; /* Verplaats de cirkel gedeeltelijk buiten het scherm */
+    width: 90%; /* Maak de cirkel groot genoeg */
+    height: 60%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(77, 28, 58, 1) 100%);
+    border-radius: 50%; /* Maak het element een cirkel */
+    z-index: 0; /* Zorg dat het achter de inhoud staat */
+    transform: translateY(-50%); /* Verticaal centreren met transform */
+    pointer-events: none; /* Zorg dat het geen muisinteracties opvangt */
+}
+
+/* Popup Statisch */
+.popup-static {
+    position: fixed;
+    top: 44%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 0.2vh solid #4d1c3a;
+    border-radius: 1.5vh;
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2vw;
+    padding: 2vh 2vw;
+}
+
+.popup-image-container {
+    flex: 1;
+    max-width: 20vw;
+    text-align: center;
+}
+
+.popup-image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 1vh;
+}
+
+.popup-text {
+    flex: 2;
+    font-size: 1.5vh;
+    color: black;
+    line-height: 1.5;
+}
+
+/* Lijn van popup naar tijdlijn */
+.popup-line {
+    position: fixed;
+    top: calc(44% + 15vh);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.4vw;
+    height: 30vh;
+    background-color: #fbd000;
+    z-index: 5;
+}
+
+/* Pijlen */
+.timeline-arrow {
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    width: 5vw;
+    height: 5vw;
+    border: 0.6vh solid #e5be00;
+    background-color: #4d1c3a;
+    color: #e5be00;
+    font-size: 2vh;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0.4vw 1vh rgba(0, 0, 0, 0.2);
+}
+
+.timeline-arrow.left-arrow {
+    left: 40vw;
+}
+
+.timeline-arrow.right-arrow {
+    right: 40vw;
+}
+
+.timeline-arrow:hover {
+    background-color: #e5be00;
+}
+
+/* Popups */
+.image-popup-content img {
+    max-width: 100%;
+    max-height: 90%;
+}
+/* Datum rechtsboven in de popup */
+.popup-date {
+    position: absolute;
+    top: 1vh; /* Dynamisch vanaf de bovenkant */
+    right: 1vw; /* Dynamisch vanaf de rechterkant */
+    color: #4d1c3a; /* Donkerpaars tekstkleur */
+    background-color: #fbd000; /* Gele achtergrond */
+    padding: 0.5vh 1vw; /* Dynamische padding */
+    border-radius: 1vh;
+    font-size: 1.5vh; /* Dynamische tekstgrootte */
+    font-weight: bold;
+    box-shadow: 0.2vw 0.5vh rgba(0, 0, 0, 0.2); /* Dynamische schaduw */
+    z-index: 10; /* Zorg dat het boven andere elementen staat */
+}
+
+/* Verberg markers met de klasse 'hidden-marker' */
+.hidden-marker {
+    display: none; /* Helemaal onzichtbaar maken */
+}
+
+/* Tijdlijnlijn */
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 0.4vh; /* Dynamische hoogte */
+    background-color: #fbd000;
+    z-index: 0;
+    transition: width 0.3s ease; /* Smooth aanpassen van de breedte */
+}
+
+/* Dotted lijn */
+.timeline-dots {
+    position: absolute;
+    top: calc(50% + 4vh); /* Dynamisch onder de tijdlijn */
+    left: 0;
+    height: 0.6vh; /* Dynamische hoogte */
+    z-index: 0;
+    background-image: repeating-linear-gradient(
+            to right,
+            #fbd000 0,
+            #fbd000 0.3vh,
+            transparent 0.3vh,
+            transparent 0.6vh
+    );
+    transition: width 0.3s ease; /* Smooth aanpassen van de breedte */
+}
+
+/* Overlay */
+.overlay {
+    position: absolute; /* Zorg ervoor dat het boven de tijdlijn zweeft */
+    top: 10%; /* Dynamisch vanaf de bovenkant */
+    left: 50%;
+    transform: translateX(-50%); /* Horizontaal centreren */
+    text-align: center;
+    z-index: 1000; /* Zorg dat het voor andere elementen staat */
+    color: white;
+    background-color: transparent; /* Geen achtergrondkleur, zodat het niet alles blokkeert */
+}
+
+.overlay-content {
+    max-width: 80vw; /* Dynamische breedte */
+    margin: 0 auto;
+    padding: 2vh; /* Dynamische padding */
+}
+
+.overlay-content h1 {
+    font-size: 3.5vw; /* Dynamische tekstgrootte */
+    margin-bottom: 2vh;
+    font-family: 'faustina', serif;
+}
+
+.overlay-content p {
+    font-size: 1.8vh; /* Dynamische tekstgrootte */
+    line-height: 1.6;
+
+    margin-bottom: 3vh;
+}
+
+.start-button {
+    background-color: transparent;
+    border: 0.2vh solid white; /* Dynamische rand */
+    color: white;
+    font-size: 1.5vh; /* Dynamische tekstgrootte */
+    padding: 1vh 2vw; /* Dynamische padding */
+    border-radius: 2.5vh;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-button:hover {
+    background-color: white;
+    color: #4d1c3a;
+}
+
+.marker.hidden {
+    display: none;
+}
+
+/* Extra info popup */
+.extra-info-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 60vw;
+    background-color: white;
+    color: black;
+    border-radius: 1vh;
+    padding: 2vh; /* Dynamische padding */
+    z-index: 2000;
+    box-shadow: 0.4vw 0.6vh rgba(0, 0, 0, 0.1);
+}
+
+.extra-info-content {
+    text-align: center;
+}
+
+.close-extra-info {
+    margin-top: 2vh; /* Dynamische marge */
+    background-color: #fbd000;
+    border: none;
+    padding: 1vh 2vw; /* Dynamische padding */
+    border-radius: 0.5vh;
+    cursor: pointer;
+    font-size: 1.5vh; /* Dynamische tekstgrootte */
+}
+
+/* Navigatieknoppen in de popup */
+.popup-nav-button {
+    position: absolute;
+    top: 50%; /* Centreer verticaal */
+    transform: translateY(-50%); /* Houd de knop gecentreerd */
+    background-color: #fbd000;
+    border: none;
+    color: #4d1c3a;
+    font-size: 1.8vh; /* Dynamische tekstgrootte */
+    font-weight: bold;
+    padding: 1vh 1.5vw; /* Dynamische padding */
+    cursor: pointer;
+    border-radius: 0.5vh;
+    transition: background-color 0.3s ease;
+    z-index: 100; /* Zorg dat de knop boven andere elementen staat */
+}
+
+.popup-nav-button:hover {
+    background-color: #e5be00;
+}
+
+.popup-nav-button.left {
+    left: -8vw; /* Dynamisch links van de popup */
+}
+
+.popup-nav-button.right {
+    right: -10vw; /* Dynamisch rechts van de popup */
+}
+
+/* Popup-header (datum en info-knopje) */
+.info-icon {
+    display: inline-block;
+    width: 2.4vh; /* Dynamische breedte */
+    height: 2.4vh; /* Dynamische hoogte */
+    line-height: 2.4vh; /* Tekst verticaal gecentreerd */
+    text-align: center;
+    font-size: 1.6vh; /* Dynamische tekstgrootte */
+    font-weight: bold;
+    color: #fff;
+    background-color: #4d1c3a;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-icon:hover {
+    background-color: #6a2b55;
+}
+
+/* Bronvermelding onder afbeelding */
+.source-text {
+    font-size: 1.2vh; /* Klein formaat tekst */
+    color: #4d1c3a; /* Donkerpaars */
+    text-align: center; /* Horizontaal centreren */
+    margin-top: 1vh; /* Ruimte boven de bron */
+    margin-bottom: 0; /* Geen extra ruimte onder de bron */
+}
